@@ -1,0 +1,25 @@
+{
+  "name": "editor",
+  "version": "0.1.0",
+  "private": true,
+  "homepage" : "http://www.baharev.info/sandbox/eventbug",
+  "dependencies": {
+    "react": "^16.0.0",
+    "react-dom": "^16.0.0",
+    "react-redux": "^5.0.6",
+    "react-sound": "^0.8.0",
+    "react-transition-group": "^2.2.1",
+    "redux": "^3.7.2",
+    "redux-undo": "^1.0.0-beta9-9-7",
+    "serve": "^6.4.1"
+  },
+  "devDependencies": {
+    "react-scripts": "1.0.14"
+  },
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test --env=jsdom",
+    "eject": "react-scripts eject"
+  }
+}
