@@ -17,10 +17,10 @@ class Tile extends PureComponent {
 
   toggle(e) {
     swallow(e)
-    console.log('pos: ', this.props.pos)
+    console.log('id: ', this.props.id)
     this.props.dispatch({
       type: 'TOGGLE_IMAGE',
-      payload: this.props.pos
+      payload: this.props.id
     })
   }
 
@@ -37,19 +37,19 @@ class Tile extends PureComponent {
 }
 
 const App = ({selected, dispatch }) => {
-  const t1 = {image: "./images/CIMG0531.JPG"}
-  const t2 = {image: "./images/CIMG0924.JPG"}
-  const first  = selected.indexOf(0) !== -1 /* Is t1 selected? */
-  const second = selected.indexOf(1) !== -1 /* Is t2 selected? */
+  const t1 = {image: "./images/Sacher.JPG"}
+  const t2 = {image: "./images/Hundert.JPG"}
+  const first  = selected.indexOf("Sacher")  !== -1 /* Is t1 selected? */
+  const second = selected.indexOf("Hundert") !== -1 /* Is t2 selected? */
   return (
     <div className="topleveldiv">
       <div className="left_panel">
-        <Tile key={"A"} image={t1.image} pos={0} dispatch={dispatch} />
-        <Tile key={"B"} image={t2.image} pos={1} dispatch={dispatch} />
+        <Tile image={t1.image} id={"Sacher"}  dispatch={dispatch} />
+        <Tile image={t2.image} id={"Hundert"} dispatch={dispatch} />
       </div>
       <div className="right_panel">
-        {first  && <Tile key={"one"} image={t1.image} pos={0} dispatch={dispatch} />}
-        {second && <Tile key={"two"} image={t2.image} pos={1} dispatch={dispatch} />}
+        {first  && <Tile image={t1.image} id={"Sacher"}  dispatch={dispatch} />}
+        {second && <Tile image={t2.image} id={"Hundert"} dispatch={dispatch} />}
       </div>
     </div>
   )
@@ -58,20 +58,19 @@ const App = ({selected, dispatch }) => {
 /*----------------------------------------------------------------------------*/
 
 export const initialState = {
- selected: [],
+ selected: ["Sacher", "Hundert"],
 }
 
 export const rootReducer = (state, action) => {
  switch (action.type) {
    case 'TOGGLE_IMAGE':
-     const pos = action.payload
+     const id = action.payload
      const selected = state.selected
-     const present = selected.indexOf(pos) !== -1
+     const present = selected.indexOf(id) !== -1
+     /* Toggle: If present, we remove it; if not present, we add it. */
      if (present)
-       /* If present, we remove it */
-       return { selected: selected.filter(e => e !== pos)}
-     /* If not present, we add it */
-     return { selected: [...selected, pos]}
+       return { selected: selected.filter(e => e !== id)}
+     return { selected: [...selected, id]}
    default:
      return state
  }

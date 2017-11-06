@@ -37,7 +37,7 @@ body {
   width: 100%;
   height: 100%;
   padding: 10px;
-  background-color: silver;
+  background-color: darkgray;
   display: grid;
   grid-template-columns: 1fr;
   grid-template-rows: repeat(6, 1fr);
