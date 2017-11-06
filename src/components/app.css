@@ -15,29 +15,10 @@ body {
   height: 100%;
 }
 
-.topleveldiv {
-  width: 100%;
-  height: 100%;
-  display: grid;
-  grid-template-columns: 2fr 1fr;
-  grid-auto-rows: auto;
-}
-
-.left_panel {
-  width: 100%;
-  height: 100%;
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  grid-template-rows: 1fr 1fr 1fr;
-  grid-gap: 10px;
-  padding: 10px;
-}
-
-.right_panel {
+.panel {
   width: 100%;
   height: 100%;
   padding: 10px;
-  background-color: darkgray;
   display: grid;
   grid-template-columns: 1fr;
   grid-template-rows: repeat(6, 1fr);
@@ -47,11 +28,11 @@ body {
 
 .tile {
   position: relative;
-
-  /* If not used, I get the following warning in Chrome:
-    [Intervention] Unable to preventDefault inside passive event listener due
-    to target being treated as passive. See:
-    https://www.chromestatus.com/features/5093566007214080
+  /*
+  If touch-action: none is not used, I get the following warning in Chrome:
+  [Intervention] Unable to preventDefault inside passive event listener due
+  to target being treated as passive. See:
+  https://www.chromestatus.com/features/5093566007214080
   */
   touch-action: none;
 }

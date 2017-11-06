@@ -19,7 +19,7 @@ class Tile extends PureComponent {
     swallow(e)
     console.log('id: ', this.props.id)
     this.props.dispatch({
-      type: 'TOGGLE_IMAGE',
+      type: 'TOUCHED',
       payload: this.props.id
     })
   }
@@ -37,20 +37,12 @@ class Tile extends PureComponent {
 }
 
 const App = ({selected, dispatch }) => {
-  const t1 = {image: "./images/Sacher.JPG"}
-  const t2 = {image: "./images/Hundert.JPG"}
-  const first  = selected.indexOf("Sacher")  !== -1 /* Is t1 selected? */
-  const second = selected.indexOf("Hundert") !== -1 /* Is t2 selected? */
+  const first  = selected.indexOf("Sacher")  !== -1
+  const second = selected.indexOf("Hundert") !== -1
   return (
-    <div className="topleveldiv">
-      <div className="left_panel">
-        <Tile image={t1.image} id={"Sacher"}  dispatch={dispatch} />
-        <Tile image={t2.image} id={"Hundert"} dispatch={dispatch} />
-      </div>
-      <div className="right_panel">
-        {first  && <Tile image={t1.image} id={"Sacher"}  dispatch={dispatch} />}
-        {second && <Tile image={t2.image} id={"Hundert"} dispatch={dispatch} />}
-      </div>
+    <div className="panel">
+      {first  && <Tile image={"./images/Sacher.JPG"}  id={"Sacher"}  dispatch={dispatch} />}
+      {second && <Tile image={"./images/Hundert.JPG"} id={"Hundert"} dispatch={dispatch} />}
     </div>
   )
 }
@@ -63,14 +55,9 @@ export const initialState = {
 
 export const rootReducer = (state, action) => {
  switch (action.type) {
-   case 'TOGGLE_IMAGE':
+   case 'TOUCHED':
      const id = action.payload
-     const selected = state.selected
-     const present = selected.indexOf(id) !== -1
-     /* Toggle: If present, we remove it; if not present, we add it. */
-     if (present)
-       return { selected: selected.filter(e => e !== id)}
-     return { selected: [...selected, id]}
+     return { selected: state.selected.filter(e => e !== id)}
    default:
      return state
  }
