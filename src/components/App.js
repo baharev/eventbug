@@ -19,7 +19,7 @@ class Tile extends PureComponent {
     swallow(e)
     console.log('id: ', this.props.id)
     this.props.dispatch({
-      type: 'TOUCHED',
+      type: 'REMOVE_TOUCHED',
       payload: this.props.id
     })
   }
@@ -30,19 +30,19 @@ class Tile extends PureComponent {
         onMouseDown={this.toggle}
         onTouchStart={this.toggle}
         onTouchEnd={swallow}>
-        <img src={this.props.image} alt="" />
+        <div className="box" style={{backgroundColor: this.props.id}}> </div>
       </div>
     )
   }
 }
 
-const App = ({selected, dispatch }) => {
-  const first  = selected.indexOf("Sacher")  !== -1
-  const second = selected.indexOf("Hundert") !== -1
+const App = ({boxes, dispatch }) => {
+  const first  = boxes.indexOf("blue")  !== -1
+  const second = boxes.indexOf("green") !== -1
   return (
-    <div className="panel">
-      {first  && <Tile image={"./images/Sacher.JPG"}  id={"Sacher"}  dispatch={dispatch} />}
-      {second && <Tile image={"./images/Hundert.JPG"} id={"Hundert"} dispatch={dispatch} />}
+    <div>
+      {first  && <Tile id={"blue"}  dispatch={dispatch} />}
+      {second && <Tile id={"green"} dispatch={dispatch} />}
     </div>
   )
 }
@@ -50,14 +50,14 @@ const App = ({selected, dispatch }) => {
 /*----------------------------------------------------------------------------*/
 
 export const initialState = {
- selected: ["Sacher", "Hundert"],
+ boxes: ["blue", "green"],
 }
 
 export const rootReducer = (state, action) => {
  switch (action.type) {
-   case 'TOUCHED':
+   case 'REMOVE_TOUCHED':
      const id = action.payload
-     return { selected: state.selected.filter(e => e !== id)}
+     return { boxes: state.boxes.filter(e => e !== id)}
    default:
      return state
  }
