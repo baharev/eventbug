@@ -37,14 +37,12 @@ class Tile extends PureComponent {
     const self = document.getElementById(this.props.id)
     console.log('adding listener to: ', self)
     self.addEventListener('touchstart', this.toggle)
-    self.addEventListener('touchend', swallow)
   }
 
   componentWillUnmount() {
     const self = document.getElementById(this.props.id)
     console.log('removing listner from: ', self)
     self.removeEventListener('touchstart', this.toggle)
-    self.removeEventListener('touchend', swallow)
   }
 }
 
