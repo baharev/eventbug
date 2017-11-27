@@ -26,13 +26,25 @@ class Tile extends PureComponent {
 
   render() {
     return (
-      <div className={`tile`}
-        onMouseDown={this.toggle}
-        onTouchStart={this.toggle}
-        onTouchEnd={swallow}>
+      <div className={`tile`} id={this.props.id}
+        onMouseDown={this.toggle}>
         <div className="box" style={{backgroundColor: this.props.id}}> </div>
       </div>
     )
+  }
+
+  componentDidMount() {
+    const self = document.getElementById(this.props.id)
+    console.log('adding listener to: ', self)
+    self.addEventListener('touchstart', this.toggle)
+    self.addEventListener('touchend', swallow)
+  }
+
+  componentWillUnmount() {
+    const self = document.getElementById(this.props.id)
+    console.log('removing listner from: ', self)
+    self.removeEventListener('touchstart', this.toggle)
+    self.removeEventListener('touchend', swallow)
   }
 }
 
